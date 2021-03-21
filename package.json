@@ -1,0 +1,11 @@
+{
+  "name": "db_quiz",
+  "version": "1.0.0",
+  "description": "COMP4537 Individual Assignment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vincent Tran",
+  "license": "ISC"
+}
