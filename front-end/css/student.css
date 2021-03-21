@@ -1,0 +1,15 @@
+.quiz_questions {
+    margin: 25pt;
+}
+
+input[type=radio] {
+    margin: 5pt;
+} 
+
+.btn {
+    margin: 5pt;
+}
+
+.quiz {
+    margin: 20pt 0;
+}
