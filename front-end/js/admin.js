@@ -101,7 +101,6 @@ const addQuestion = (number, question = "", radioChoices = [], answer = -1) => {
 
 // Create HTML elements for all questions
 const populateQuestion = (id, number, question = "", radioChoices = [], answer = -1) => {
-    console.log("hi");
     let quiz = document.createElement("div");
     quiz.id = "question" + number;
 
@@ -196,7 +195,6 @@ window.addEventListener("load", () => {
     xhttp.send();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
             questions = JSON.parse(this.responseText);
 
             //if questions is not empty
@@ -219,21 +217,6 @@ window.addEventListener("load", () => {
         }
     }
 });
-
-/**
- * GET: Retrieve all questions from database.
- */
-function getAll() {
-    const xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "questions", true);
-    xhttp.send();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
-            return JSON.parse(this.responseText);
-        }
-    }
-}
 
 /**
  * POST question to database
@@ -275,7 +258,6 @@ function postQuestion() {
             optiond: optiond
         })
     }).then(res => {
-        console.log(res);
         location.reload();
         return;
     });
@@ -321,7 +303,6 @@ function putQuestion(id, questionNum) {
             optiond: optiond
         })
     }).then(res => {
-        console.log(res);
         location.reload();
         return;
     });

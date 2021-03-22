@@ -1,8 +1,5 @@
 const express = require("express");
 const mysql = require('mysql');
-let url = require('url');
-const http = require('http');
-const { resolveSoa } = require("dns");
 const app = express();
 
 app.set('view options', {layout: false});
@@ -31,30 +28,22 @@ app.get("/questions", (req, res) => {
     const createTableQuery = "CREATE TABLE IF NOT EXISTS Questions (id INT AUTO_INCREMENT, body VARCHAR(255), answer VARCHAR(255), optiona VARCHAR(255), optionb VARCHAR(255), optionc VARCHAR(255), optiond VARCHAR(255), PRIMARY KEY (id))";
     con.query(createTableQuery, (err, result) => {
         if (err) throw err;
-        console.log('Table created');
         con.query("SELECT * FROM Questions", (err, result) => {
             res.send(result);
-            console.log(result);
         })
     })
 })
 
 app.post("/questions", (req, res) => {
-    console.log(req.body);
     con.query("INSERT INTO Questions (body,answer,optiona,optionb,optionc,optiond) VALUES ('" + req.body.body + "','" + req.body.answer + "','" + req.body.optiona + "','" +  req.body.optionb + "','" + req.body.optionc + "','" + req.body.optiond +"')", (err, result) => {
         if (err) throw err;
-        console.log(result);
         res.send(result);
     })
 })
 
 app.put("/questions/:id", (req, res) => {
-    console.log("===PUT===");
-    console.log(req.params.id);
-    console.log(req.body);
     con.query("UPDATE Questions SET body = '" + req.body.body + "', answer = '" + req.body.answer + "', optiona = '" + req.body.optiona + "', optionb = '" +  req.body.optionb + "', optionc = '" + req.body.optionc + "', optiond = '" + req.body.optiond +"' WHERE id = " + req.params.id, (err, result) => {
         if (err) throw err;
-        console.log(result);
         res.send(result);
     })
 })

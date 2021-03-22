@@ -13,7 +13,6 @@ window.addEventListener("load", () => {
     xhttp.send();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
             questions = JSON.parse(this.responseText);
 
             //if questions is not empty
@@ -139,9 +138,6 @@ const questionTemplate = (number, question = "", radioChoices = [], answer = -1)
 
 // Calculate the score and return the admin and user answers as an object array
 const calculateScore = () => {
-    // const questions = JSON.parse(localStorage.getItem("questions"));
-    console.log("calculate");
-    console.log(questions);
     let score = 0;
     let answerArray = [];
 
@@ -158,7 +154,7 @@ const calculateScore = () => {
         // where ${number} is the question number
         const options = document.getElementsByName(questionName);
         answerSet.userAnswer = Array.from(options.values()).findIndex((j) => j.checked);
-    
+
         if (answerSet.adminAnswer == answerSet.userAnswer) {
             score++;
             answerSet.correct = true;
@@ -193,8 +189,6 @@ const updatePage = (answers) => {
     }
 
     const radios = document.getElementsByClassName("radioQuestions");
-
-    console.log(radios);
     
     for (let i = 0; i < radios.length; i++) {
         if (answers[i].correct) {
@@ -203,7 +197,9 @@ const updatePage = (answers) => {
         } else {
             answerText[i].style.backgroundColor = "rgba(213,146,146,0.5)";
             radios[i].children[answers[i].adminAnswer].style.backgroundColor = "rgba(136,245,138,0.5)";
-            radios[i].children[answers[i].userAnswer].style.backgroundColor = "rgba(213,146,146,0.5)";
+            if (answers[i].userAnswer >= 0) {
+                radios[i].children[answers[i].userAnswer].style.backgroundColor = "rgba(213,146,146,0.5)";
+            }
         }
     }
     
