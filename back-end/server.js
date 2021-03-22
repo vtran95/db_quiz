@@ -7,10 +7,10 @@ app.use(express.static('front-end'));
 app.use(express.json());
 
 const con = mysql.createPool( {
-    host: 'us-cdbr-east-03.cleardb.com',
-    user: 'bbf35e71cb4bbe',
-    password: '1104f7eb',
-    database: 'heroku_f63bd1f2c0630dc'
+    host: process.env.HOST,
+    user: process.env.USER,
+    password: process.env.PASSWORD,
+    database: process.env.DB
 });
 
 app.use(function(req, res, next) {
